@@ -8,8 +8,11 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.firestore();
 
+const authMiddleware = require('../authentification/authMiddleware');
+
 const userApp = express();
 
+userApp.use(authMiddleware);
 userApp.use(cors({origin: true}));
 
 userApp.get('/', async (req, res) => {
